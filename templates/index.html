@@ -3,80 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Riesgo en Salud</title>
+    <title>Evaluación de Riesgo en Salud</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 400px;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            margin: auto;
-        }
-        input, button {
-            width: 100%;
-            margin: 8px 0;
-            padding: 8px;
-        }
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-        }
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; }
+        .container { padding: 20px; background: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        input, button { width: 100%; padding: 10px; margin: 5px 0; }
+        button { background: #007BFF; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h2>Calculadora de Riesgo en Salud</h2>
-        <label for="peso">Peso (kg):</label>
-        <input type="number" id="peso" placeholder="Ingrese su peso" required>
+        <h2>Evaluación de Riesgo en Salud</h2>
+        <form method="POST">
+            <label>Peso (kg):</label>
+            <input type="number" step="0.1" name="peso" value="{{ peso }}" required>
 
-        <label for="altura">Altura (m):</label>
-        <input type="number" step="0.01" id="altura" placeholder="Ingrese su altura" required>
+            <label>Altura (m):</label>
+            <input type="number" step="0.01" name="altura" value="{{ altura }}" required>
 
-        <h3>Factores de Riesgo</h3>
-        <div class="checkbox-group">
-            <label><input type="checkbox" value="Fumador"> Fumador</label>
-            <label><input type="checkbox" value="Hipertensión"> Hipertensión</label>
-            <label><input type="checkbox" value="Diabetes"> Diabetes</label>
-            <label><input type="checkbox" value="Sedentarismo"> Sedentarismo</label>
-            <label><input type="checkbox" value="Colesterol alto"> Colesterol alto</label>
-        </div>
+            <h3>Factores de Riesgo</h3>
+            {% for factor in factores_riesgo %}
+                <label>
+                    <input type="checkbox" name="factores_riesgo" value="{{ factor }}"
+                    {% if factor in factores_seleccionados %}checked{% endif %}>
+                    {{ factor }}
+                </label><br>
+            {% endfor %}
 
-        <button onclick="enviarDatos()">Calcular Riesgo</button>
+            <button type="submit">Calcular Riesgo</button>
+        </form>
 
-        <h3>Resultado:</h3>
-        <p id="resultado">Aún no calculado.</p>
+        {% if imc is not none %}
+            <p><strong>IMC:</strong> {{ imc }}</p>
+            <p><strong>Nivel de Riesgo:</strong> <span style="color: red;">{{ nivel_riesgo }}</span></p>
+        {% endif %}
     </div>
 
-    <script>
-        function enviarDatos() {
-            let peso = document.getElementById("peso").value;
-            let altura = document.getElementById("altura").value;
-            let factores = [];
-            document.querySelectorAll(".checkbox-group input:checked").forEach(el => factores.push(el.value));
-
-            let data = { peso: parseFloat(peso), altura: parseFloat(altura), factoresRiesgo: factores };
-
-            fetch("/calcular-riesgo", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("resultado").innerText = `Nivel de Riesgo: ${data.nivel_riesgo}`;
-            })
-            .catch(error => {
-                document.getElementById("resultado").innerText = "Error en el cálculo.";
-                console.error("Error:", error);
-            });
-        }
-    </script>
 </body>
 </html>

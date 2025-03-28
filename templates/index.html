@@ -23,11 +23,11 @@
         .checkbox-group label {
             display: flex;
             align-items: center;
+            gap: 8px; /* Espacio entre el checkbox y el texto */
+            width: 100%;
+            font-weight: normal; /* Evita negritas que desalinean el texto */
+            white-space: nowrap; /* Evita saltos de línea inesperados */
             cursor: pointer;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            margin-right: 10px; /* Da espacio entre el checkbox y el texto */
         }
 
     </style>
@@ -53,7 +53,7 @@
                         <input type="checkbox" name="factores_riesgo" value="{{ factor }}" 
                                {% if factor in factores_seleccionados %}checked{% endif %}>
                         {{ factor }}
-                    </label><br>
+                    </label>
                 {% endfor %}
             </div>
 

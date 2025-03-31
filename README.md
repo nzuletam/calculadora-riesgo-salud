@@ -1,8 +1,7 @@
-1️⃣ Creación y Desarrollo de la Aplicación Flask
-Antes de desplegar la aplicación, se trabajó en su desarrollo en Python con Flask.
+Proceso Desarrollo y Despliegue de la Aplicación Flask
 
-🔹 Pasos realizados en el código:
-Definir el backend con Flask (app.py):
+1️⃣ Pasos realizados en el código:
+Definir el backend en Python con Flask (app.py):
 
 Implementación de la lógica para calcular el IMC y nivel de riesgo.
 

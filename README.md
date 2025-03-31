@@ -1,13 +1,14 @@
-Proceso Desarrollo y Despliegue de la Aplicación Flask
+Proceso Desarrollo y Despliegue de la Aplicación
 
-1️⃣ Pasos realizados en el código:
-Definir el backend en Python con Flask (app.py):
+1️⃣ Pasos realizados en el código
+
+🔹 Definir el backend en Python con Flask (app.py):
 
 Implementación de la lógica para calcular el IMC y nivel de riesgo.
 
 Uso de Flask para manejar las solicitudes GET y POST.
 
-Renderizado de una plantilla HTML para la interfaz de usuario.
+🔹 Renderizado de una plantilla HTML para la interfaz de usuario.
 
 Desarollo frontend - Creación plantilla HTML (templates/index.html):
 
@@ -25,7 +26,7 @@ Se creó la carpeta static/images/ para almacenar el logo de la aplicación.
 
 Se utilizó CSS para mejorar la presentación y alineación del formulario.
 
-Archivo de dependencias (requirements.txt):
+🔹 Archivo de dependencias (requirements.txt)
 
 Se listaron las librerías necesarias para ejecutar la aplicación:
 
